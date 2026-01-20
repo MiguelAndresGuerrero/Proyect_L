@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corazón Digital</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="./media/png-transparent-pink-and-black-heart-illustration-heart-pink-heart-love-color-human-body-removebg-preview.png" type="image/x-icon">
+</head>
+<body>
+    <!-- Fondo de partículas -->
+    <canvas id="particles-bg"></canvas>
+    
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="main-title">Para <span class="her-name">[Su Nombre]</span></h1>
+            <p class="main-subtitle">Este corazón late solo por ti. Cada latido, cada partícula, cada recuerdo existe porque tú existes.</p>
+        </header>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <!-- Sección del corazón -->
+            <section class="heart-section">
+                <div class="heart-wrapper">
+                    <canvas id="heartCanvas"></canvas>
+                    <div class="heart-beat-ring"></div>
+                    <div class="heart-pulse-effect"></div>
+                </div>
+
+                <!-- Estadísticas del corazón -->
+                <div class="heart-stats-container">
+                    <div class="heart-stat-card">
+                        <div class="stat-title">
+                            <i class="fas fa-heartbeat"></i>
+                            <h4>Latidos por minuto</h4>
+                        </div>
+                        <div class="stat-value-large" id="heartbeat">
+                            72 <span class="unit">BPM</span>
+                        </div>
+                        <div class="stat-description">
+                            El corazón late más rápido cuando interactúas con él
+                        </div>
+                    </div>
+
+                    <div class="heart-stat-card">
+                        <div class="stat-title">
+                            <i class="fas fa-heart"></i>
+                            <h4>Nivel de Amor</h4>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="loveFill"></div>
+                            </div>
+                            <div class="progress-percent" id="lovePercent">0%</div>
+                        </div>
+                        <div class="stat-description">
+                            Aumenta con cada interacción y recuerdo guardado
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controles del corazón -->
+                <div class="heart-controls">
+                    <button class="heart-control-btn" id="touchGentle">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Toque Suave</span>
+                    </button>
+                    <button class="heart-control-btn" id="touchStrong">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Latido Fuerte</span>
+                    </button>
+                    <button class="heart-control-btn" id="touchRhythm">
+                        <i class="fas fa-music"></i>
+                        <span>Ritmo Especial</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Panel de interacción -->
+            <section class="interaction-section">
+                <div class="section-title">
+                    <i class="fas fa-comment-heart"></i>
+                    <h2>Deja tu huella en este corazón</h2>
+                </div>
+
+                <!-- Área de mensajes -->
+                <div class="message-area">
+                    <textarea id="memoryInput" placeholder="Escribe un mensaje que quieras guardar para siempre en este corazón... Este recuerdo será único y solo tú lo verás."></textarea>
+                    <button id="saveMemory" class="save-memory-btn">
+                        <i class="fas fa-save"></i>
+                        Guardar en el corazón
+                    </button>
+                </div>
+
+                <!-- Memorias guardadas -->
+                <div class="memories-section">
+                    <div class="section-title">
+                        <i class="fas fa-history"></i>
+                        <h3>Recuerdos Guardados</h3>
+                        <span class="memory-count" id="memoryCount">0</span>
+                    </div>
+                    <div class="memories-container" id="memoriesContainer">
+                        <!-- Los recuerdos aparecerán aquí -->
+                    </div>
+                </div>
+
+                <!-- Sección secreta -->
+                <div class="secret-section">
+                    <button id="revealSecret" class="secret-btn">
+                        <i class="fas fa-lock"></i>
+                        Revelar el Secreto del Corazón
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div id="secretMessage" class="secret-message">
+                        <!-- Mensaje secreto aparecerá aquí -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <div class="signature">
+                    <p>Creado con <i class="fas fa-heart"></i> y código para ti</p>
+                    <p class="coder-name">por <span id="signatureName">[Tu Nombre]</span></p>
+                </div>
+                <div class="footer-info">
+                    <p class="instructions">
+                        Haz clic en el corazón para hacerlo latir más fuerte
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal secreto -->
+    <div id="secretModal" class="secret-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-gem"></i>
+                    El Secreto del Corazón
+                    <i class="fas fa-gem"></i>
+                </h2>
+                <button class="close-modal-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="secret-heart-animation">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <p id="modalText" class="modal-text">
+                    Este corazón fue programado para latir solo cuando piensa en ti. Cada línea de código contiene un pedacito de lo que siento.
+                </p>
+                <div class="binary-message">
+                    <code>01000011 01100001 01100100 01100001 00100000 01101100 01100001 01110100 01101001 01100100 01101111 00100000 01100101 01110011 00100000 01110000 01101111 01110010 00100000 01110100 01101001</code>
+                    <small><i class="fas fa-key"></i> Traduce este código binario para descubrir el mensaje oculto</small>
+                </div>
+                <div class="modal-actions">
+                    <button id="createSpecialMemory" class="special-memory-btn">
+                        <i class="fas fa-star"></i>
+                        Crear Recuerdo Especial
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensajes flotantes -->
+    <div id="floatingMessages"></div>
+
+    <!-- Scripts -->
+    <script src="./heart.js"></script>
+    <script src="./particles.js"></script>
+    <script src="./memories.js"></script>
+</body>
+</html>
